@@ -61,3 +61,53 @@ export interface ApiError {
   error: string;
   detail?: string;
 }
+
+/**
+ * Comment from API response
+ */
+export interface Comment {
+  id: string;
+  post_id: string;
+  user_id: string;
+  content: string;
+  username: string;
+  display_name: string | null;
+  avatar_url: string | null;
+  is_deleted: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+/**
+ * Request to create a comment
+ */
+export interface CreateCommentRequest {
+  post_id: string;
+  user_id: string;
+  content: string;
+}
+
+/**
+ * Paginated comments response
+ */
+export interface CommentsListResponse {
+  comments: Comment[];
+  pagination: {
+    page: number;
+    limit: number;
+    total: number;
+    pages: number;
+  };
+}
+
+/**
+ * User profile
+ */
+export interface User {
+  id: string;
+  username: string;
+  display_name: string | null;
+  avatar_url: string | null;
+  bio: string | null;
+  created_at: string;
+}

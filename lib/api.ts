@@ -2,7 +2,16 @@
  * API client for communicating with Python FastAPI backend
  */
 
-import type { Post, PostsListResponse, CreatePostRequest, ImageGenerationResponse, SavePostRequest } from '@/types';
+import type {
+  Post,
+  PostsListResponse,
+  CreatePostRequest,
+  ImageGenerationResponse,
+  SavePostRequest,
+  Comment,
+  CommentsListResponse,
+  CreateCommentRequest,
+} from '@/types';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
@@ -126,4 +135,64 @@ export async function createPost(data: CreatePostRequest): Promise<Post> {
   }
 
   return response.json();
+}
+
+/**
+ * Get comments for a post
+ */
+export async function getComments(
+  postId: string,
+  page: number = 1,
+  limit: number = 20
+): Promise<CommentsListResponse> {
+  const url = new URL(`${API_URL}/api/comments/post/${postId}`);
+  url.searchParams.set('page', page.toString());
+  url.searchParams.set('limit', limit.toString());
+
+  const response = await fetch(url.toString(), {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch comments: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Create a new comment
+ */
+export async function createComment(data: CreateCommentRequest): Promise<Comment> {
+  const response = await fetch(`${API_URL}/api/comments`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(error.error || error.detail || 'Failed to create comment');
+  }
+
+  return response.json();
+}
+
+/**
+ * Delete a comment (soft delete)
+ */
+export async function deleteComment(commentId: string, userId: string): Promise<void> {
+  const url = new URL(`${API_URL}/api/comments/${commentId}`);
+  url.searchParams.set('user_id', userId);
+
+  const response = await fetch(url.toString(), {
+    method: 'DELETE',
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ error: 'Unknown error' }));
+    throw new Error(error.error || error.detail || 'Failed to delete comment');
+  }
 }

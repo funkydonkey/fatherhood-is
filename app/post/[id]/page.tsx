@@ -52,11 +52,11 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-blue-50">
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-3xl mx-auto px-4 py-6">
         {/* Back Button */}
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-8 transition-colors"
+          className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 transition-colors"
         >
           <svg
             className="w-5 h-5"
@@ -77,7 +77,7 @@ export default async function PostPage({ params }: Props) {
         {/* Post Card */}
         <article className="bg-white rounded-2xl shadow-lg overflow-hidden">
           {/* Image */}
-          <div className="relative w-full aspect-[2/3] bg-gradient-to-br from-pink-100 to-blue-100">
+          <div className="relative w-full max-w-md mx-auto aspect-[2/3] bg-gradient-to-br from-pink-100 to-blue-100">
             <Image
               src={post.image_url}
               alt={`Fatherhood is ${post.text}`}
@@ -88,21 +88,21 @@ export default async function PostPage({ params }: Props) {
           </div>
 
           {/* Content */}
-          <div className="p-8">
+          <div className="p-6">
             {/* Text */}
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">
               Fatherhood is... <span className="text-pink-600">{post.text}</span>
             </h1>
 
             {/* Author */}
             {post.author_name && (
-              <p className="text-gray-600 mb-6">
+              <p className="text-gray-600 mb-4 text-sm">
                 Shared by <span className="font-semibold text-gray-900">{post.author_name}</span>
               </p>
             )}
 
             {/* Metadata */}
-            <div className="flex items-center gap-6 text-sm text-gray-500 border-t pt-6">
+            <div className="flex items-center gap-6 text-sm text-gray-500 border-t pt-4">
               <div className="flex items-center gap-2">
                 <svg
                   className="w-5 h-5 text-red-500"
@@ -147,11 +147,11 @@ export default async function PostPage({ params }: Props) {
         </article>
 
         {/* Share Your Own Story CTA */}
-        <div className="mt-8 text-center">
-          <p className="text-gray-600 mb-4">Have your own story to share?</p>
+        <div className="mt-6 text-center pb-4">
+          <p className="text-gray-600 mb-3 text-sm">Have your own story to share?</p>
           <Link
             href="/create"
-            className="inline-block bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold px-8 py-3 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105"
+            className="inline-block bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold px-6 py-2.5 rounded-full hover:shadow-lg transition-all duration-300 hover:scale-105 text-sm"
           >
             Share Your Story
           </Link>

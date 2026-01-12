@@ -10,6 +10,14 @@ from .post import (
     ImageGenerationResponse,
     PostInDB,
 )
+from .comment import (
+    CommentBase,
+    CommentCreate,
+    CommentUpdate,
+    CommentResponse,
+    CommentsListResponse,
+    CommentPaginationInfo,
+)
 
 __all__ = [
     "PostBase",
@@ -20,4 +28,10 @@ __all__ = [
     "PaginationInfo",
     "ImageGenerationResponse",
     "PostInDB",
+    "CommentBase",
+    "CommentCreate",
+    "CommentUpdate",
+    "CommentResponse",
+    "CommentsListResponse",
+    "CommentPaginationInfo",
 ]

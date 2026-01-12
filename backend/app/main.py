@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from app.api.posts import router as posts_router
+from app.api.comments import router as comments_router
 from app.config import settings
 
 # Create FastAPI app
@@ -32,6 +33,7 @@ app.mount("/uploads", StaticFiles(directory=uploads_dir), name="uploads")
 
 # Include routers
 app.include_router(posts_router)
+app.include_router(comments_router)
 
 
 @app.get("/")

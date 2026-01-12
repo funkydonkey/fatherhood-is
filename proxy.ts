@@ -1,12 +1,12 @@
 /**
- * Next.js Middleware for Supabase Auth
+ * Next.js 16 Proxy for Supabase Auth
  * Refreshes user session on every request
  */
 
 import { createServerClient } from '@supabase/ssr';
 import { NextResponse, type NextRequest } from 'next/server';
 
-export async function middleware(request: NextRequest) {
+export async function GET(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
     request,
   });
@@ -20,7 +20,7 @@ export async function middleware(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
           supabaseResponse = NextResponse.next({
@@ -55,7 +55,6 @@ export const config = {
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
      * - public folder
-     * - API routes that don't need auth
      */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],

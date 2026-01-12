@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { getPosts } from '@/lib/api';
 import { PostGrid } from '@/components/PostGrid';
+import { Header } from '@/components/Header';
 
 export default async function Home() {
   // Fetch initial posts using Server Component
@@ -9,23 +9,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-blue-50 to-purple-50">
       {/* Header */}
-      <header className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center gap-3">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Fatherhood Is...
-              </h1>
-            </div>
-            <Link
-              href="/create"
-              className="rounded-full bg-black px-6 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 hover:bg-gray-800"
-            >
-              Share Your Story
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Main content */}
       <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

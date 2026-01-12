@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
+import { Header } from '@/components/Header';
+import { Comments } from '@/components/Comments';
 
 type Props = {
   params: Promise<{
@@ -52,6 +54,8 @@ export default async function PostPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-blue-50">
+      <Header />
+
       <div className="max-w-3xl mx-auto px-4 py-6">
         {/* Back Button */}
         <Link
@@ -143,6 +147,11 @@ export default async function PostPage({ params }: Props) {
                 })}
               </div>
             </div>
+          </div>
+
+          {/* Comments section */}
+          <div className="px-6 pb-6">
+            <Comments postId={post.id} />
           </div>
         </article>
 

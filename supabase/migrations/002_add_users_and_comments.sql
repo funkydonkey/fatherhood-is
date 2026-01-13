@@ -47,13 +47,16 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- Triggers for updated_at
+-- Triggers for updated_at (drop if exists first for idempotency)
+DROP TRIGGER IF EXISTS update_users_updated_at ON users;
 CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON users
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_comments_updated_at ON comments;
 CREATE TRIGGER update_comments_updated_at BEFORE UPDATE ON comments
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
+DROP TRIGGER IF EXISTS update_posts_updated_at ON posts;
 CREATE TRIGGER update_posts_updated_at BEFORE UPDATE ON posts
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
@@ -61,32 +64,39 @@ CREATE TRIGGER update_posts_updated_at BEFORE UPDATE ON posts
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE comments ENABLE ROW LEVEL SECURITY;
 
--- Users policies
+-- Users policies (drop if exists first for idempotency)
+DROP POLICY IF EXISTS "Public profiles are viewable by everyone" ON users;
 CREATE POLICY "Public profiles are viewable by everyone"
     ON users FOR SELECT
     USING (true);
 
+DROP POLICY IF EXISTS "Users can insert their own profile" ON users;
 CREATE POLICY "Users can insert their own profile"
     ON users FOR INSERT
     WITH CHECK (auth.uid() = id);
 
+DROP POLICY IF EXISTS "Users can update own profile" ON users;
 CREATE POLICY "Users can update own profile"
     ON users FOR UPDATE
     USING (auth.uid() = id);
 
--- Comments policies
+-- Comments policies (drop if exists first for idempotency)
+DROP POLICY IF EXISTS "Comments are viewable by everyone" ON comments;
 CREATE POLICY "Comments are viewable by everyone"
     ON comments FOR SELECT
     USING (NOT is_deleted OR user_id = auth.uid());
 
+DROP POLICY IF EXISTS "Authenticated users can create comments" ON comments;
 CREATE POLICY "Authenticated users can create comments"
     ON comments FOR INSERT
     WITH CHECK (auth.uid() = user_id AND auth.uid() IS NOT NULL);
 
+DROP POLICY IF EXISTS "Users can update own comments" ON comments;
 CREATE POLICY "Users can update own comments"
     ON comments FOR UPDATE
     USING (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can delete own comments (soft delete)" ON comments;
 CREATE POLICY "Users can delete own comments (soft delete)"
     ON comments FOR UPDATE
     USING (auth.uid() = user_id);
@@ -113,19 +123,22 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Triggers for comments count
+-- Triggers for comments count (drop if exists first for idempotency)
+DROP TRIGGER IF EXISTS increment_post_comments_count ON comments;
 CREATE TRIGGER increment_post_comments_count
     AFTER INSERT ON comments
     FOR EACH ROW
     WHEN (NEW.is_deleted = FALSE)
     EXECUTE FUNCTION increment_comments_count();
 
+DROP TRIGGER IF EXISTS decrement_post_comments_count ON comments;
 CREATE TRIGGER decrement_post_comments_count
     AFTER DELETE ON comments
     FOR EACH ROW
     EXECUTE FUNCTION decrement_comments_count();
 
 -- Trigger for soft delete
+DROP TRIGGER IF EXISTS soft_delete_comment_count ON comments;
 CREATE TRIGGER soft_delete_comment_count
     AFTER UPDATE OF is_deleted ON comments
     FOR EACH ROW

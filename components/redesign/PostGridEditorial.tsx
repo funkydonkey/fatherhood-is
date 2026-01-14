@@ -73,7 +73,7 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
                     src={post.image_url}
                     alt={post.text}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                 ) : (
@@ -81,24 +81,24 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
                 )}
               </div>
 
-              <div className={`${isLarge || isTall ? 'p-8' : 'p-6'} flex-1 flex flex-col`}>
-                <div className="text-[11px] text-gray-500 mb-3 uppercase tracking-wide font-medium">
+              <div className={`${isLarge || isTall ? 'p-5' : 'p-4'} flex-1 flex flex-col`}>
+                <div className="text-[11px] text-gray-500 mb-2 uppercase tracking-wide font-medium">
                   {index === 0 && 'Featured · '}
                   {formatDate(post.created_at)}
                   {!isSmall && ' · 5 min read'}
                 </div>
 
-                <h3 className={`${titleSize} leading-tight mb-3 font-normal tracking-tight flex-1`}>
+                <h3 className={`${titleSize} leading-tight mb-2 font-normal tracking-tight flex-1`}>
                   {post.text}
                 </h3>
 
                 {showExcerpt && (
-                  <p className={`${isLarge ? 'text-[17px]' : 'text-[15px]'} leading-relaxed text-gray-600 mb-4`}>
+                  <p className={`${isLarge ? 'text-[17px]' : 'text-[15px]'} leading-relaxed text-gray-600 mb-3`}>
                     There&apos;s a moment every father remembers — the day you let go and watch your child ride forward into their own courage.
                   </p>
                 )}
 
-                <div className="mt-auto pt-4 border-t border-gray-100">
+                <div className="mt-auto pt-3 border-t border-gray-100">
                   <div className="text-[13px] font-semibold mb-2">
                     By {post.author_name || 'Anonymous'}
                   </div>

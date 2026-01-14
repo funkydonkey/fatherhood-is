@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatherhood Is - Monochrome Minimalism</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #FAFAFA;
+            color: #1A1A1A;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+
+        /* Header */
+        header {
+            padding: 50px 0;
+            background: #FFFFFF;
+            border-bottom: 2px solid #1A1A1A;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1A1A1A;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 45px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #4A4A4A;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #1A1A1A;
+        }
+
+        .btn-mono {
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 14px 36px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-mono:hover {
+            background: #000000;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #1A1A1A;
+            border: 2px solid #1A1A1A;
+        }
+
+        .btn-outline:hover {
+            background: #1A1A1A;
+            color: #FFFFFF;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0;
+            background: linear-gradient(180deg, #FFFFFF 0%, #F5F5F5 100%);
+            border-bottom: 1px solid #DADADA;
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 84px;
+            font-weight: 900;
+            color: #1A1A1A;
+            margin-bottom: 30px;
+            letter-spacing: -3px;
+            line-height: 1;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #5A5A5A;
+            margin-bottom: 50px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        /* Contrast Section */
+        .contrast-section {
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 100px 0;
+        }
+
+        .contrast-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 60px;
+        }
+
+        .contrast-item {
+            text-align: center;
+        }
+
+        .contrast-number {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .contrast-label {
+            font-size: 13px;
+            color: #B0B0B0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Section */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .section-title {
+            font-size: 52px;
+            font-weight: 900;
+            color: #1A1A1A;
+            letter-spacing: -1px;
+        }
+
+        .section-filter {
+            display: flex;
+            gap: 0;
+            border: 2px solid #1A1A1A;
+        }
+
+        .filter-btn {
+            padding: 12px 28px;
+            background: transparent;
+            border: none;
+            color: #1A1A1A;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-right: 2px solid #1A1A1A;
+        }
+
+        .filter-btn:last-child {
+            border-right: none;
+        }
+
+        .filter-btn.active {
+            background: #1A1A1A;
+            color: #FFFFFF;
+        }
+
+        .filter-btn:hover {
+            background: #F5F5F5;
+        }
+
+        .filter-btn.active:hover {
+            background: #000000;
+        }
+
+        /* Posts Masonry */
+        .posts-masonry {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .post-card {
+            background: #FFFFFF;
+            border: 2px solid #E5E5E5;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .post-card:hover {
+            border-color: #1A1A1A;
+            transform: translateY(-2px);
+        }
+
+        .post-card.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .post-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #F9F9F9 0%, #E8E8E8 100%);
+            border-bottom: 2px solid #E5E5E5;
+            position: relative;
+        }
+
+        .post-card.featured .post-image {
+            aspect-ratio: 16/9;
+        }
+
+        .post-card:hover .post-image {
+            border-bottom-color: #1A1A1A;
+        }
+
+        .post-image::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px dashed #D5D5D5;
+        }
+
+        .post-content {
+            padding: 28px;
+        }
+
+        .post-card.featured .post-content {
+            padding: 36px;
+        }
+
+        .post-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #8A8A8A;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .post-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1A1A1A;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .post-card.featured .post-text {
+            font-size: 24px;
+        }
+
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            border-top: 1px solid #E5E5E5;
+        }
+
+        .post-author {
+            font-size: 14px;
+            font-weight: 600;
+            color: #4A4A4A;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: #8A8A8A;
+            font-weight: 600;
+        }
+
+        /* Create Section */
+        .create-section {
+            background: #F5F5F5;
+            padding: 120px 0;
+            margin: 80px 0;
+            border-top: 2px solid #1A1A1A;
+            border-bottom: 2px solid #1A1A1A;
+        }
+
+        .create-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .create-section h2 {
+            font-size: 64px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            color: #1A1A1A;
+            letter-spacing: -2px;
+        }
+
+        .create-section p {
+            font-size: 18px;
+            color: #5A5A5A;
+            margin-bottom: 50px;
+            line-height: 1.7;
+        }
+
+        .input-mono {
+            width: 100%;
+            background: #FFFFFF;
+            border: 2px solid #1A1A1A;
+            color: #1A1A1A;
+            padding: 20px;
+            font-size: 16px;
+            font-family: inherit;
+            font-weight: 500;
+            margin-bottom: 24px;
+            resize: vertical;
+        }
+
+        .input-mono::placeholder {
+            color: #B0B0B0;
+        }
+
+        .input-mono:focus {
+            outline: none;
+            background: #FAFAFA;
+        }
+
+        /* Grid Pattern Background */
+        .pattern-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pattern-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(#E8E8E8 1px, transparent 1px),
+                linear-gradient(90deg, #E8E8E8 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #1A1A1A;
+            color: #FFFFFF;
+            padding: 80px 0 50px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .footer-brand p {
+            font-size: 15px;
+            color: #B0B0B0;
+            line-height: 1.7;
+        }
+
+        .footer-section h4 {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #B0B0B0;
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 2.2;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .footer-section a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #3A3A3A;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #7A7A7A;
+            font-weight: 600;
+        }
+
+        @media (max-width: 1024px) {
+            .posts-masonry {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .post-card.featured {
+                grid-column: span 1;
+                grid-row: span 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            .hero h1 {
+                font-size: 52px;
+            }
+
+            .posts-masonry {
+                grid-template-columns: 1fr;
+            }
+
+            .contrast-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="logo">Fatherhood Is</div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="btn-mono">Get Started</a>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-tag">New Platform</div>
+                <h1>Define<br>Fatherhood</h1>
+                <p>A bold platform where fathers share their definitions through AI-generated art inspired by the timeless "Love Is..." style.</p>
+                <div class="hero-cta">
+                    <a href="#create" class="btn-mono">Create Post</a>
+                    <a href="#gallery" class="btn-mono btn-outline">Explore</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contrast Section -->
+        <section class="contrast-section">
+            <div class="container">
+                <div class="contrast-grid">
+                    <div class="contrast-item">
+                        <div class="contrast-number">2,847</div>
+                        <div class="contrast-label">Stories</div>
+                    </div>
+                    <div class="contrast-item">
+                        <div class="contrast-number">1,523</div>
+                        <div class="contrast-label">Fathers</div>
+                    </div>
+                    <div class="contrast-item">
+                        <div class="contrast-number">89</div>
+                        <div class="contrast-label">Countries</div>
+                    </div>
+                    <div class="contrast-item">
+                        <div class="contrast-number">24/7</div>
+                        <div class="contrast-label">Active</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Posts Section -->
+        <section class="section pattern-section">
+            <div class="section-header">
+                <h2 class="section-title">Recent Stories</h2>
+                <div class="section-filter">
+                    <button class="filter-btn active">Latest</button>
+                    <button class="filter-btn">Popular</button>
+                    <button class="filter-btn">Following</button>
+                </div>
+            </div>
+
+            <div class="posts-masonry">
+                <article class="post-card featured">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-label">Featured</div>
+                        <div class="post-text">Teaching my daughter to ride a bike without training wheels</div>
+                        <div class="post-meta">
+                            <div class="post-author">John Miller</div>
+                            <div class="post-stats">
+                                <span>124 ❤</span>
+                                <span>12 💬</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-label">2 hours ago</div>
+                        <div class="post-text">Reading bedtime stories</div>
+                        <div class="post-meta">
+                            <div class="post-author">Michael Chen</div>
+                            <div class="post-stats">
+                                <span>98 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-label">5 hours ago</div>
+                        <div class="post-text">Building a treehouse</div>
+                        <div class="post-meta">
+                            <div class="post-author">David Wilson</div>
+                            <div class="post-stats">
+                                <span>156 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-label">1 day ago</div>
+                        <div class="post-text">Sunday pancakes</div>
+                        <div class="post-meta">
+                            <div class="post-author">James Park</div>
+                            <div class="post-stats">
+                                <span>203 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-label">1 day ago</div>
+                        <div class="post-text">Coaching little league</div>
+                        <div class="post-meta">
+                            <div class="post-author">Robert Taylor</div>
+                            <div class="post-stats">
+                                <span>87 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-label">2 days ago</div>
+                        <div class="post-text">Teaching to swim</div>
+                        <div class="post-meta">
+                            <div class="post-author">Chris Anderson</div>
+                            <div class="post-stats">
+                                <span>142 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- Create Section -->
+    <section class="create-section">
+        <div class="container">
+            <div class="create-content">
+                <h2>Share Your Story</h2>
+                <p>What does fatherhood mean to you? Share your definition and we'll create a beautiful illustration.</p>
+                <textarea class="input-mono" rows="5" placeholder="Fatherhood is..."></textarea>
+                <button class="btn-mono">Generate Artwork</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>Fatherhood Is</h3>
+                    <p>A platform celebrating fathers everywhere through shared stories and AI-generated art.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Create</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>© 2026 Fatherhood Is</div>
+                <div>Made with love</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

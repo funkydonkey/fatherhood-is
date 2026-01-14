@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatherhood Is - Editorial Minimalism</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', 'Georgia', serif;
+            background: #FFFFFF;
+            color: #1A1A1A;
+            line-height: 1.75;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 0;
+            border-bottom: 3px solid #1A1A1A;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: 600;
+            color: #1A1A1A;
+            font-style: italic;
+            letter-spacing: -1px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: baseline;
+            gap: 40px;
+        }
+
+        .issue {
+            font-size: 13px;
+            font-weight: 400;
+            color: #6B6B6B;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #1A1A1A;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 400;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 100px 0 120px;
+            border-bottom: 1px solid #E5E5E5;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero-issue {
+            font-size: 14px;
+            font-weight: 400;
+            color: #6B6B6B;
+            margin-bottom: 24px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: 110px;
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 40px;
+            color: #1A1A1A;
+            letter-spacing: -3px;
+        }
+
+        .hero-intro {
+            font-size: 28px;
+            line-height: 1.6;
+            color: #3A3A3A;
+            margin-bottom: 50px;
+            font-weight: 400;
+        }
+
+        .hero-byline {
+            font-size: 15px;
+            color: #8B8B8B;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        /* Pull Quote */
+        .pull-quote {
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid #E5E5E5;
+            border-bottom: 1px solid #E5E5E5;
+            margin: 80px 0;
+        }
+
+        .pull-quote blockquote {
+            font-size: 42px;
+            line-height: 1.5;
+            color: #1A1A1A;
+            max-width: 900px;
+            margin: 0 auto;
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .pull-quote cite {
+            display: block;
+            margin-top: 30px;
+            font-size: 16px;
+            font-style: normal;
+            color: #8B8B8B;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+
+        /* Article Grid */
+        .article-section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            padding-bottom: 24px;
+            border-bottom: 3px solid #1A1A1A;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .section-title {
+            font-size: 52px;
+            font-weight: 400;
+            margin-top: 8px;
+            letter-spacing: -1px;
+        }
+
+        /* Masonry Grid Layout */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            grid-auto-rows: 50px;
+        }
+
+        .article-card {
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .article-card:hover {
+            border-color: #1A1A1A;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Different card sizes */
+        .article-card.large {
+            grid-column: span 2;
+            grid-row: span 12;
+        }
+
+        .article-card.medium {
+            grid-row: span 10;
+        }
+
+        .article-card.tall {
+            grid-row: span 14;
+        }
+
+        .article-card.small {
+            grid-row: span 8;
+        }
+
+        .article-card.wide {
+            grid-column: span 2;
+            grid-row: span 8;
+        }
+
+        .article-image {
+            width: 100%;
+            height: 60%;
+            background: #F8F8F8;
+            border-bottom: 1px solid #E5E5E5;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .article-card.small .article-image,
+        .article-card.wide .article-image {
+            height: 50%;
+        }
+
+        .article-card.tall .article-image {
+            height: 65%;
+        }
+
+        .article-image::before {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            border: 1px solid #E8E8E8;
+        }
+
+        .article-content {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card.large .article-content,
+        .article-card.tall .article-content {
+            padding: 32px;
+        }
+
+        .article-meta {
+            font-size: 11px;
+            color: #8B8B8B;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-title {
+            font-size: 22px;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            font-weight: 400;
+            color: #1A1A1A;
+            letter-spacing: -0.5px;
+            flex: 1;
+        }
+
+        .article-card.large .article-title {
+            font-size: 32px;
+            margin-bottom: 16px;
+        }
+
+        .article-card.tall .article-title {
+            font-size: 26px;
+        }
+
+        .article-card.small .article-title {
+            font-size: 18px;
+        }
+
+        .article-excerpt {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #5A5A5A;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        .article-card.large .article-excerpt,
+        .article-card.tall .article-excerpt {
+            display: block;
+        }
+
+        .article-card.large .article-excerpt {
+            font-size: 17px;
+        }
+
+        .article-footer {
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .article-author {
+            font-size: 13px;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .article-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: #8B8B8B;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Featured Section */
+        .featured-section {
+            background: #F8F8F8;
+            padding: 100px 0;
+            margin: 100px 0;
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .featured-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #FFFFFF;
+            border: 1px solid #E5E5E5;
+        }
+
+        .featured-text h2 {
+            font-size: 56px;
+            line-height: 1.2;
+            margin-bottom: 32px;
+            font-weight: 400;
+            letter-spacing: -1px;
+        }
+
+        .featured-text p {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #5A5A5A;
+            margin-bottom: 40px;
+        }
+
+        .btn-editorial {
+            display: inline-block;
+            padding: 18px 50px;
+            background: #1A1A1A;
+            color: #FFFFFF;
+            text-decoration: none;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-editorial:hover {
+            background: #000000;
+            transform: translateY(-2px);
+        }
+
+        /* Create Section */
+        .create-section {
+            padding: 120px 0;
+            text-align: center;
+            border-top: 3px solid #1A1A1A;
+            border-bottom: 3px solid #1A1A1A;
+            margin: 100px 0;
+        }
+
+        .create-section h2 {
+            font-size: 68px;
+            font-weight: 400;
+            margin-bottom: 32px;
+            letter-spacing: -1px;
+        }
+
+        .create-section p {
+            font-size: 22px;
+            color: #5A5A5A;
+            max-width: 700px;
+            margin: 0 auto 60px;
+            line-height: 1.6;
+        }
+
+        .input-editorial {
+            max-width: 800px;
+            margin: 0 auto 32px;
+            background: #F8F8F8;
+            border: 1px solid #E5E5E5;
+            padding: 24px;
+            font-size: 18px;
+            font-family: 'Crimson Pro', serif;
+            color: #1A1A1A;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        .input-editorial::placeholder {
+            color: #B0B0B0;
+            font-style: italic;
+        }
+
+        .input-editorial:focus {
+            outline: none;
+            border-color: #1A1A1A;
+            background: #FFFFFF;
+        }
+
+        /* Footer */
+        footer {
+            padding: 80px 0 60px;
+            border-top: 3px solid #1A1A1A;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand {
+            padding-right: 40px;
+        }
+
+        .footer-brand .logo {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #6B6B6B;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #6B6B6B;
+            text-decoration: none;
+            font-size: 16px;
+            line-height: 2.2;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #1A1A1A;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid #E5E5E5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-legal {
+            font-size: 14px;
+            color: #8B8B8B;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 28px;
+        }
+
+        .footer-social a {
+            color: #6B6B6B;
+            text-decoration: none;
+            font-size: 15px;
+            font-family: 'Inter', sans-serif;
+            transition: color 0.3s;
+        }
+
+        .footer-social a:hover {
+            color: #1A1A1A;
+        }
+
+        @media (max-width: 1024px) {
+            .articles-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 60px;
+            }
+
+            .article-card.large,
+            .article-card.wide {
+                grid-column: span 1;
+            }
+
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 24px;
+            }
+
+            .hero h1 {
+                font-size: 64px;
+            }
+
+            .hero-intro {
+                font-size: 22px;
+            }
+
+            .pull-quote blockquote {
+                font-size: 28px;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: auto;
+                gap: 24px;
+            }
+
+            .article-card,
+            .article-card.large,
+            .article-card.medium,
+            .article-card.tall,
+            .article-card.small,
+            .article-card.wide {
+                grid-column: span 1;
+                grid-row: auto;
+            }
+
+            .article-image {
+                height: 250px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .header-right {
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 12px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 24px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="logo">Fatherhood Is</div>
+                <div class="header-right">
+                    <div class="issue">Volume I, Issue 1 — 2026</div>
+                    <nav>
+                        <ul class="nav-links">
+                            <li><a href="#stories">Stories</a></li>
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#about">About</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-issue">Editorial / Featured</div>
+                <h1>Define<br>Fatherhood</h1>
+                <p class="hero-intro">A literary platform where fathers share their definitions through AI-generated art, inspired by the timeless "Love Is..." illustrations.</p>
+                <div class="hero-byline">Curated stories from fathers around the world</div>
+            </div>
+        </section>
+
+        <!-- Pull Quote -->
+        <section class="pull-quote">
+            <blockquote>
+                "The heart of a father is the masterpiece of nature."
+                <cite>— Antoine François Prévost</cite>
+            </blockquote>
+        </section>
+
+        <!-- Articles Section -->
+        <section class="article-section">
+            <div class="section-header">
+                <div class="section-label">Recent Stories</div>
+                <h2 class="section-title">Shared Moments</h2>
+            </div>
+
+            <div class="articles-grid">
+                <!-- Large featured card -->
+                <article class="article-card large">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">Featured · 2 hours ago · 5 min read</div>
+                        <h3 class="article-title">Teaching my daughter to ride a bike without training wheels</h3>
+                        <p class="article-excerpt">There's a moment every father remembers — the day you let go of the bicycle seat and watch your child ride forward into their own courage. It's not just about balance.</p>
+                        <div class="article-footer">
+                            <div class="article-author">By John Miller</div>
+                            <div class="article-stats">
+                                <span>124 Reads</span>
+                                <span>12 Comments</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Medium card -->
+                <article class="article-card medium">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">5 hours ago · 4 min</div>
+                        <h3 class="article-title">Reading bedtime stories every single night</h3>
+                        <div class="article-footer">
+                            <div class="article-author">By Michael Chen</div>
+                            <div class="article-stats">
+                                <span>98 Reads</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Small card -->
+                <article class="article-card small">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">8 hours ago</div>
+                        <h3 class="article-title">Sunday morning pancakes</h3>
+                        <div class="article-footer">
+                            <div class="article-author">By James Park</div>
+                            <div class="article-stats">
+                                <span>203 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Wide card -->
+                <article class="article-card wide">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">1 day ago · 3 min read</div>
+                        <h3 class="article-title">First day of school preparations</h3>
+                        <div class="article-footer">
+                            <div class="article-author">By Robert Taylor</div>
+                            <div class="article-stats">
+                                <span>87 Reads</span>
+                                <span>6 Comments</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Tall card -->
+                <article class="article-card tall">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">1 day ago · 6 min read</div>
+                        <h3 class="article-title">Building a treehouse together on weekends</h3>
+                        <p class="article-excerpt">Wood, nails, and imagination — the materials that build not just a treehouse, but the foundation of trust.</p>
+                        <div class="article-footer">
+                            <div class="article-author">By David Wilson</div>
+                            <div class="article-stats">
+                                <span>156 Reads</span>
+                                <span>15 Comments</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Medium card -->
+                <article class="article-card medium">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">2 days ago · 4 min</div>
+                        <h3 class="article-title">Teaching them to swim at the lake</h3>
+                        <div class="article-footer">
+                            <div class="article-author">By Chris Anderson</div>
+                            <div class="article-stats">
+                                <span>142 Reads</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Small card -->
+                <article class="article-card small">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">2 days ago</div>
+                        <h3 class="article-title">Late night talks</h3>
+                        <div class="article-footer">
+                            <div class="article-author">By Tom Harris</div>
+                            <div class="article-stats">
+                                <span>76 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Medium card -->
+                <article class="article-card medium">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">3 days ago · 5 min</div>
+                        <h3 class="article-title">Coaching the little league team</h3>
+                        <div class="article-footer">
+                            <div class="article-author">By Mark Johnson</div>
+                            <div class="article-stats">
+                                <span>112 Reads</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Small card -->
+                <article class="article-card small">
+                    <div class="article-image"></div>
+                    <div class="article-content">
+                        <div class="article-meta">3 days ago</div>
+                        <h3 class="article-title">First steps</h3>
+                        <div class="article-footer">
+                            <div class="article-author">By Alex Brown</div>
+                            <div class="article-stats">
+                                <span>94 ❤</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+
+    <!-- Featured Section -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-content">
+                <div class="featured-image"></div>
+                <div class="featured-text">
+                    <h2>Share Your Definition</h2>
+                    <p>Every father has a unique perspective on what fatherhood means. Share yours through words, and we'll create a timeless illustration to accompany your story.</p>
+                    <a href="#create" class="btn-editorial">Contribute</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Create Section -->
+        <section class="create-section" id="create">
+            <h2>Contribute Your Story</h2>
+            <p>What does fatherhood mean to you? Share your definition and we'll create a beautiful "Love Is..." style illustration.</p>
+            <textarea class="input-editorial" rows="5" placeholder="Fatherhood is..."></textarea>
+            <button class="btn-editorial">Submit Story</button>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">Fatherhood Is</div>
+                    <p>A literary platform celebrating the depth, wisdom, and love of fathers through shared stories and timeless art.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Stories</a></li>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Contribute</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Editorial Team</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Advertise</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-legal">© 2026 Fatherhood Is. All rights reserved.</div>
+                <div class="footer-social">
+                    <a href="#">Twitter</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Facebook</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

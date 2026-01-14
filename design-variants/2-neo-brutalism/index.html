@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatherhood Is - Neo-Brutalism Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', 'Arial Black', sans-serif;
+            background: #FEFAE0;
+            min-height: 100vh;
+            padding: 2rem;
+            color: #0A0A0A;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Brutal Border Style */
+        .brutal-border {
+            border: 4px solid #0A0A0A;
+            box-shadow: 8px 8px 0 #0A0A0A;
+            transition: all 0.2s;
+        }
+
+        .brutal-border:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 6px 6px 0 #0A0A0A;
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 3rem;
+        }
+
+        .header-content {
+            background: #FF6B6B;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #0A0A0A;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #0A0A0A;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .nav-links a:hover {
+            transform: skew(-5deg);
+        }
+
+        .btn-primary {
+            background: #FFD93D;
+            color: #0A0A0A;
+            padding: 0.75rem 2rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 4px solid #0A0A0A;
+            box-shadow: 4px 4px 0 #0A0A0A;
+        }
+
+        .btn-primary:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #0A0A0A;
+        }
+
+        .btn-secondary {
+            background: #6BCF7F;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #4ECDC4;
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #0A0A0A;
+            margin-bottom: 1rem;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -3px;
+            text-shadow: 6px 6px 0 rgba(10, 10, 10, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: #0A0A0A;
+            margin-bottom: 2rem;
+            font-weight: 700;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Sticker/Badge */
+        .sticker {
+            display: inline-block;
+            background: #FF6B6B;
+            color: #0A0A0A;
+            padding: 0.5rem 1.5rem;
+            border: 3px solid #0A0A0A;
+            transform: rotate(-3deg);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        /* Posts Grid */
+        .posts-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+            color: #0A0A0A;
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .post-card {
+            background: white;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .post-card:hover {
+            transform: translate(4px, 4px);
+        }
+
+        .post-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, #FFD93D, #FF6B6B);
+            border-bottom: 4px solid #0A0A0A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+        }
+
+        .post-image::before {
+            content: '✨';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.3;
+        }
+
+        .post-content {
+            padding: 1.5rem;
+            background: white;
+        }
+
+        .post-text {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            color: #0A0A0A;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .post-author {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            font-weight: 900;
+        }
+
+        .post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #FEFAE0;
+            border: 3px solid #0A0A0A;
+        }
+
+        /* Create Post Section */
+        .create-section {
+            background: #6BCF7F;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .create-section h2 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+        }
+
+        .input-brutal {
+            background: white;
+            border: 4px solid #0A0A0A;
+            box-shadow: 6px 6px 0 #0A0A0A;
+            padding: 1.5rem;
+            color: #0A0A0A;
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .input-brutal::placeholder {
+            color: #999;
+            font-weight: 700;
+        }
+
+        .input-brutal:focus {
+            outline: none;
+            background: #FFD93D;
+        }
+
+        /* Grid Pattern Background */
+        .pattern-bg {
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 19px, #0A0A0A 19px, #0A0A0A 21px),
+                repeating-linear-gradient(90deg, transparent, transparent 19px, #0A0A0A 19px, #0A0A0A 21px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #0A0A0A;
+            color: #FEFAE0;
+            margin-top: 4rem;
+            border: 4px solid #0A0A0A;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="pattern-bg"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content brutal-border">
+                <div class="logo">Fatherhood<br>Is</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#explore">Explore</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <a href="#" class="btn-primary">Sign In</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="hero brutal-border">
+            <div class="sticker">✨ New Platform</div>
+            <h1>Share Your<br>Definition</h1>
+            <p>Express what fatherhood means to you through AI-generated art in the iconic "Love Is..." style</p>
+            <div class="cta-buttons">
+                <a href="#create" class="btn-primary">Create Post</a>
+                <a href="#explore" class="btn-primary btn-secondary">Explore</a>
+            </div>
+        </div>
+
+        <!-- Posts Grid -->
+        <div class="posts-section">
+            <h2 class="section-title">Recent Posts</h2>
+            <div class="posts-grid">
+                <div class="post-card brutal-border">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-text">Teaching my daughter to ride a bike</div>
+                        <div class="post-author">by John</div>
+                        <div class="post-stats">
+                            <span>❤️ 124</span>
+                            <span>💬 12</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-card brutal-border">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-text">Reading bedtime stories every night</div>
+                        <div class="post-author">by Michael</div>
+                        <div class="post-stats">
+                            <span>❤️ 98</span>
+                            <span>💬 8</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post-card brutal-border">
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-text">Building a treehouse together</div>
+                        <div class="post-author">by David</div>
+                        <div class="post-stats">
+                            <span>❤️ 156</span>
+                            <span>💬 15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Section -->
+        <div class="create-section brutal-border" id="create">
+            <h2>Create Your Post</h2>
+            <textarea
+                class="input-brutal"
+                rows="4"
+                placeholder="Fatherhood is..."></textarea>
+            <a href="#" class="btn-primary">Generate Image ✨</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>Made with ❤️ for fathers everywhere</p>
+            <p style="margin-top: 1rem; opacity: 0.8; font-size: 1rem;">© 2026 Fatherhood Is</p>
+        </footer>
+    </div>
+</body>
+</html>

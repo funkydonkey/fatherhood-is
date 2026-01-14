@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatherhood Is - Luxury Minimalism</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+            background: #0A0A0A;
+            color: #F5F5F5;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* Header */
+        header {
+            padding: 60px 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 400;
+            color: #D4AF37;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 50px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #F5F5F5;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.4s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-links a:hover {
+            color: #D4AF37;
+        }
+
+        .btn-luxury {
+            background: transparent;
+            color: #D4AF37;
+            border: 1px solid #D4AF37;
+            padding: 14px 40px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.4s;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .btn-luxury:hover {
+            background: #D4AF37;
+            color: #0A0A0A;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 140px 0 180px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .hero-ornament {
+            font-size: 24px;
+            color: #D4AF37;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: 90px;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 40px;
+            color: #F5F5F5;
+            letter-spacing: 2px;
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: rgba(245, 245, 245, 0.7);
+            max-width: 700px;
+            margin: 0 auto 60px;
+            font-weight: 300;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .hero-divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+            margin: 60px auto 40px;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 80px;
+            margin-top: 80px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            color: #D4AF37;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(245, 245, 245, 0.6);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Section */
+        .section {
+            padding: 120px 0;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .section-number {
+            font-size: 14px;
+            letter-spacing: 3px;
+            color: #D4AF37;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .section-title {
+            font-size: 54px;
+            font-weight: 300;
+            color: #F5F5F5;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+        }
+
+        .post-card {
+            display: flex;
+            gap: 40px;
+            padding: 40px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            transition: all 0.5s;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .post-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            background: rgba(255, 255, 255, 0.03);
+            transform: translateY(-4px);
+        }
+
+        .post-number {
+            font-size: 16px;
+            color: #D4AF37;
+            min-width: 40px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .post-image {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .post-image::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60%;
+            height: 60%;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .post-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .post-text {
+            font-size: 24px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #F5F5F5;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .post-author {
+            font-size: 13px;
+            color: #D4AF37;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .post-meta {
+            display: flex;
+            gap: 30px;
+            font-size: 12px;
+            color: rgba(245, 245, 245, 0.5);
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Create Section */
+        .create-section {
+            padding: 160px 0;
+            text-align: center;
+            background: linear-gradient(180deg, transparent, rgba(212, 175, 55, 0.03), transparent);
+            margin: 120px 0;
+        }
+
+        .create-ornament {
+            font-size: 32px;
+            color: #D4AF37;
+            margin-bottom: 40px;
+        }
+
+        .create-section h2 {
+            font-size: 64px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: #F5F5F5;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+
+        .create-section p {
+            font-size: 18px;
+            color: rgba(245, 245, 245, 0.7);
+            max-width: 600px;
+            margin: 0 auto 60px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .input-luxury {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            color: #F5F5F5;
+            padding: 20px 0;
+            font-size: 20px;
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            text-align: center;
+            resize: none;
+            transition: border-color 0.4s;
+        }
+
+        .input-luxury::placeholder {
+            color: rgba(245, 245, 245, 0.3);
+        }
+
+        .input-luxury:focus {
+            outline: none;
+            border-bottom-color: #D4AF37;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            padding: 140px 0;
+            text-align: center;
+        }
+
+        .quote {
+            font-size: 36px;
+            font-style: italic;
+            color: #F5F5F5;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .quote-author {
+            font-size: 14px;
+            color: #D4AF37;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Footer */
+        footer {
+            padding: 100px 0 60px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            margin-top: 120px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand .logo {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            font-size: 16px;
+            color: rgba(245, 245, 245, 0.6);
+            line-height: 1.8;
+            max-width: 350px;
+            font-style: italic;
+        }
+
+        .footer-section h4 {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+            color: #D4AF37;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(245, 245, 245, 0.6);
+            text-decoration: none;
+            font-size: 15px;
+            line-height: 2.4;
+            transition: color 0.3s;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .footer-section a:hover {
+            color: #D4AF37;
+        }
+
+        .footer-bottom {
+            padding-top: 40px;
+            border-top: 1px solid rgba(212, 175, 55, 0.1);
+            text-align: center;
+            font-size: 12px;
+            color: rgba(245, 245, 245, 0.4);
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @media (max-width: 1024px) {
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 30px;
+            }
+
+            .hero h1 {
+                font-size: 56px;
+            }
+
+            .post-card {
+                flex-direction: column;
+            }
+
+            .post-image {
+                width: 100%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="header-content">
+                <div class="logo">Fatherhood Is</div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#about">About</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="btn-luxury">Join</a>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-ornament">✦</div>
+            <h1>Define<br>Fatherhood</h1>
+            <p class="hero-subtitle">A distinguished platform where fathers share their definitions through timeless art</p>
+            <div class="hero-divider"></div>
+            <a href="#create" class="btn-luxury">Create Your Legacy</a>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-number">2,847</div>
+                    <div class="stat-label">Stories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,523</div>
+                    <div class="stat-label">Fathers</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">89</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Posts Section -->
+        <section class="section">
+            <div class="section-header">
+                <div class="section-number">— I —</div>
+                <h2 class="section-title">Shared Wisdom</h2>
+            </div>
+
+            <div class="posts-grid">
+                <article class="post-card">
+                    <div class="post-number">01</div>
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-text">Teaching my daughter to ride without training wheels</div>
+                        <div class="post-author">John Miller</div>
+                        <div class="post-meta">
+                            <span>124 Appreciations</span>
+                            <span>12 Reflections</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-number">02</div>
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-text">Reading bedtime stories every single night</div>
+                        <div class="post-author">Michael Chen</div>
+                        <div class="post-meta">
+                            <span>98 Appreciations</span>
+                            <span>8 Reflections</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-number">03</div>
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-text">Building a treehouse together on weekends</div>
+                        <div class="post-author">David Wilson</div>
+                        <div class="post-meta">
+                            <span>156 Appreciations</span>
+                            <span>15 Reflections</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-card">
+                    <div class="post-number">04</div>
+                    <div class="post-image"></div>
+                    <div class="post-content">
+                        <div class="post-text">Making Sunday morning breakfast traditions</div>
+                        <div class="post-author">James Park</div>
+                        <div class="post-meta">
+                            <span>203 Appreciations</span>
+                            <span>21 Reflections</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Quote Section -->
+        <section class="quote-section">
+            <div class="hero-divider"></div>
+            <blockquote class="quote">
+                "The quality of a father can be seen in the goals, dreams, and aspirations he sets not only for himself, but for his family."
+            </blockquote>
+            <div class="quote-author">— Reed Markham</div>
+            <div class="hero-divider"></div>
+        </section>
+
+        <!-- Create Section -->
+        <section class="create-section" id="create">
+            <div class="create-ornament">✦</div>
+            <h2>Share Your Legacy</h2>
+            <p>Express what fatherhood means to you. We'll create an elegant illustration to honor your words.</p>
+            <textarea class="input-luxury" rows="1" placeholder="Fatherhood is..."></textarea>
+            <button class="btn-luxury">Generate Artwork</button>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">Fatherhood Is</div>
+                    <p>A distinguished platform celebrating the timeless wisdom and love of fathers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Create</a></li>
+                        <li><a href="#">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© MMXXVI Fatherhood Is — All Rights Reserved</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

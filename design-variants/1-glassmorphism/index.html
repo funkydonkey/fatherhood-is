@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatherhood Is - Glassmorphism Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            overflow-x: hidden;
+        }
+
+        /* Floating background shapes */
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        body::before {
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.3);
+            top: -200px;
+            right: -100px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        body::after {
+            width: 400px;
+            height: 400px;
+            background: rgba(102, 126, 234, 0.4);
+            bottom: -150px;
+            left: -100px;
+            animation: float 15s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Glass card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header */
+        header {
+            margin-bottom: 3rem;
+        }
+
+        .header-glass {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 3rem 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Posts Grid */
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .post-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-image::before {
+            content: '🎨';
+            font-size: 4rem;
+            opacity: 0.3;
+        }
+
+        .post-content {
+            padding: 1rem;
+        }
+
+        .post-text {
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .post-author {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        .post-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+        }
+
+        .post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Create Post Section */
+        .create-section {
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .create-section h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .input-glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            color: white;
+            font-size: 1.1rem;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 1.5rem;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .input-glass::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .input-glass:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="glass-card header-glass">
+                <div class="logo">Fatherhood Is</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#explore">Explore</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <a href="#" class="btn-primary">Sign In</a>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <div class="glass-card hero">
+            <h1>Share Your Definition<br>of Fatherhood</h1>
+            <p>Express what fatherhood means to you through AI-generated art</p>
+            <div class="cta-buttons">
+                <a href="#create" class="btn-primary">Create Your Post</a>
+            </div>
+        </div>
+
+        <!-- Posts Grid -->
+        <div class="posts-grid">
+            <div class="glass-card post-card">
+                <div class="post-image"></div>
+                <div class="post-content">
+                    <div class="post-text">Fatherhood is... teaching my daughter to ride a bike</div>
+                    <div class="post-author">by John</div>
+                    <div class="post-stats">
+                        <span>❤️ 124</span>
+                        <span>💬 12</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card post-card">
+                <div class="post-image"></div>
+                <div class="post-content">
+                    <div class="post-text">Fatherhood is... reading bedtime stories every night</div>
+                    <div class="post-author">by Michael</div>
+                    <div class="post-stats">
+                        <span>❤️ 98</span>
+                        <span>💬 8</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-card post-card">
+                <div class="post-image"></div>
+                <div class="post-content">
+                    <div class="post-text">Fatherhood is... building a treehouse together</div>
+                    <div class="post-author">by David</div>
+                    <div class="post-stats">
+                        <span>❤️ 156</span>
+                        <span>💬 15</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Section -->
+        <div class="glass-card create-section" id="create">
+            <h2>Create Your Post</h2>
+            <textarea
+                class="input-glass"
+                rows="4"
+                placeholder="Fatherhood is..."></textarea>
+            <a href="#" class="btn-primary">Generate Image</a>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="glass-card">
+                <p>Made with ❤️ for fathers everywhere</p>
+                <p style="margin-top: 0.5rem; opacity: 0.7;">© 2026 Fatherhood Is</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

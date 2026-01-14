@@ -64,7 +64,7 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
           return (
             <Link
               key={post.id}
-              href={`/post/${post.id}`}
+              href={`/redesign/post/${post.id}`}
               className={`${colSpan} ${rowSpan} bg-white border border-gray-200 hover:border-black hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer group`}
             >
               <div className={`${imageHeight} relative bg-gray-50 border-b border-gray-200 flex-shrink-0 overflow-hidden`}>

@@ -53,7 +53,6 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
           if (isSmall) rowSpan = 'row-span-8';
           if (isWide) rowSpan = 'row-span-8';
 
-          const showExcerpt = isLarge || isTall;
           const imageHeight = isSmall || isWide ? 'h-[50%]' : isTall ? 'h-[65%]' : 'h-[60%]';
 
           let titleSize = 'text-[22px]';
@@ -88,15 +87,9 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
                   {!isSmall && ' · 5 min read'}
                 </div>
 
-                <h3 className={`${titleSize} leading-tight mb-2 font-normal tracking-tight flex-1`}>
+                <h3 className={`${titleSize} leading-tight mb-2 font-normal tracking-tight`}>
                   {post.text}
                 </h3>
-
-                {showExcerpt && (
-                  <p className={`${isLarge ? 'text-[17px]' : 'text-[15px]'} leading-relaxed text-gray-600 mb-3`}>
-                    There&apos;s a moment every father remembers — the day you let go and watch your child ride forward into their own courage.
-                  </p>
-                )}
 
                 <div className="mt-auto pt-3 border-t border-gray-100">
                   <div className="text-[13px] font-semibold mb-2">

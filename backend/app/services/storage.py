@@ -15,6 +15,13 @@ class LocalStorageService:
         self.upload_dir = "uploads"
         os.makedirs(self.upload_dir, exist_ok=True)
 
+        # Determine base URL based on environment
+        if settings.is_production:
+            # On Render, use the service URL
+            self.base_url = os.getenv("RENDER_EXTERNAL_URL", "http://localhost:8000")
+        else:
+            self.base_url = f"http://{settings.api_host}:{settings.api_port}"
+
     async def upload_image(
         self, image_bytes: bytes, filename: Optional[str] = None
     ) -> str:
@@ -28,7 +35,7 @@ class LocalStorageService:
         with open(file_path, "wb") as f:
             f.write(image_bytes)
 
-        return f"http://localhost:8000/uploads/{filename}"
+        return f"{self.base_url}/uploads/{filename}"
 
     async def delete_image(self, filename: str) -> bool:
         """Delete local image"""
@@ -52,11 +59,8 @@ class StorageService:
     """
 
     def __init__(self):
-        # Check if R2 is configured (not placeholder values)
-        self.use_local = (
-            "your-account-id" in settings.r2_account_id
-            or "your-access-key" in settings.r2_access_key_id
-        )
+        # Check if R2 is fully configured
+        self.use_local = not settings.use_r2_storage
 
         if self.use_local:
             print("⚠️  R2 not configured, using local file storage")

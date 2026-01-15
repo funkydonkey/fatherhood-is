@@ -1,0 +1,28 @@
+# Production dependencies for Render.com deployment
+# Generated from pyproject.toml
+
+# Web Framework
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+
+# Database
+supabase>=2.3.4
+asyncpg>=0.29.0
+
+# AI Image Generation
+google-genai>=0.2.2
+
+# Image Processing
+pillow>=10.2.0
+
+# Cloud Storage
+boto3>=1.34.34
+
+# Validation & Settings
+pydantic>=2.5.3
+pydantic-settings>=2.1.0
+python-dotenv>=1.0.1
+
+# HTTP Client
+httpx>=0.26.0

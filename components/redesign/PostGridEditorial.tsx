@@ -38,7 +38,7 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
         </h2>
       </div>
 
-      <div className="grid grid-cols-3 gap-[30px] auto-rows-[50px]">
+      <div className="grid grid-cols-3 gap-x-[30px] gap-y-0 auto-rows-[1px]">
         {posts.slice(0, 9).map((post, index) => {
           const size = cardSizes[index % cardSizes.length];
           const isLarge = size === 'large';
@@ -47,24 +47,54 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
           const isSmall = size === 'small';
 
           const colSpan = isLarge || isWide ? 'col-span-2' : 'col-span-1';
-          let rowSpan = 'row-span-10'; // medium
-          if (isLarge) rowSpan = 'row-span-12';
-          if (isTall) rowSpan = 'row-span-14';
-          if (isSmall) rowSpan = 'row-span-8';
-          if (isWide) rowSpan = 'row-span-8';
 
-          const imageHeight = isSmall || isWide ? 'h-[50%]' : isTall ? 'h-[65%]' : 'h-[60%]';
+          // Рассчитываем высоту: изображение + контент (единый padding 20px + footer min-h-90px)
+          // Большие карточки требуют больше места для крупного текста
+          let rowSpan = '';
+          if (isLarge) {
+            // Large: квадратное изображение + крупный текст (4 строки 32px) + footer
+            // Крупный текст занимает ~140px (4 строки), нужно значительно больше места
+            rowSpan = 'row-span-[880]';
+          } else if (isTall) {
+            // Tall: квадратное изображение + средний текст (4 строки 26px) + footer
+            // Средний текст занимает ~115px (4 строки)
+            rowSpan = 'row-span-[750]';
+          } else if (isWide) {
+            // Wide: широкое изображение (2:1) + средний текст (3 строки) + footer
+            rowSpan = 'row-span-[480]';
+          } else if (isSmall) {
+            // Small: компактное изображение (4:3) + маленький текст (2 строки) + footer
+            rowSpan = 'row-span-[410]';
+          } else {
+            // Medium: квадратное изображение + средний текст (3 строки) + footer
+            rowSpan = 'row-span-[540]';
+          }
+
+          let imageHeight = 'aspect-square';
+          if (isWide) imageHeight = 'aspect-[2/1]';
+          if (isSmall) imageHeight = 'aspect-[4/3]';
 
           let titleSize = 'text-[22px]';
-          if (isLarge) titleSize = 'text-[32px]';
-          else if (isTall) titleSize = 'text-[26px]';
-          else if (isSmall) titleSize = 'text-[18px]';
+          let titleLines = 'line-clamp-3';
+          if (isLarge) {
+            titleSize = 'text-[32px]';
+            titleLines = 'line-clamp-4';
+          } else if (isTall) {
+            titleSize = 'text-[26px]';
+            titleLines = 'line-clamp-4';
+          } else if (isSmall) {
+            titleSize = 'text-[18px]';
+            titleLines = 'line-clamp-2';
+          }
+
+          // Единый padding для всех карточек для консистентности
+          const padding = 'p-5';
 
           return (
             <Link
               key={post.id}
               href={`/redesign/post/${post.id}`}
-              className={`${colSpan} ${rowSpan} bg-white border border-gray-200 hover:border-black hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer group`}
+              className={`${colSpan} ${rowSpan} mb-[30px] bg-white border border-gray-200 hover:border-black hover:shadow-lg transition-all duration-300 flex flex-col cursor-pointer group overflow-hidden`}
             >
               <div className={`${imageHeight} relative bg-gray-50 border-b border-gray-200 flex-shrink-0 overflow-hidden`}>
                 {post.image_url ? (
@@ -80,22 +110,23 @@ export function PostGridEditorial({ posts }: PostGridEditorialProps) {
                 )}
               </div>
 
-              <div className={`${isLarge || isTall ? 'p-5' : 'p-4'} flex-1 flex flex-col`}>
-                <div className="text-[11px] text-gray-500 mb-2 uppercase tracking-wide font-medium">
-                  {index === 0 && 'Featured · '}
-                  {formatDate(post.created_at)}
-                  {!isSmall && ' · 5 min read'}
+              <div className={`${padding} flex flex-col flex-grow justify-between`}>
+                <div className="flex-shrink-0">
+                  <div className="text-[11px] text-gray-500 mb-2 uppercase tracking-wide font-medium">
+                    {index === 0 && 'Featured · '}
+                    {formatDate(post.created_at)}
+                  </div>
+
+                  <h3 className={`${titleSize} ${titleLines} leading-tight mb-3 font-normal tracking-tight`}>
+                    {post.text}
+                  </h3>
                 </div>
 
-                <h3 className={`${titleSize} leading-tight mb-2 font-normal tracking-tight`}>
-                  {post.text}
-                </h3>
-
-                <div className="mt-auto pt-3 border-t border-gray-100">
-                  <div className="text-[13px] font-semibold mb-2">
+                <div className="pt-3 border-t border-gray-100 mt-auto flex-shrink-0 min-h-[90px]">
+                  <div className="text-[13px] font-semibold mb-2 truncate overflow-hidden">
                     By {post.author_name || 'Anonymous'}
                   </div>
-                  <div className="flex gap-4 text-[12px] text-gray-500">
+                  <div className="flex gap-4 text-[12px] text-gray-500 flex-wrap">
                     {post.likes_count > 0 && <span>{post.likes_count} Likes</span>}
                     {post.comments_count > 0 && <span>{post.comments_count} Comments</span>}
                   </div>

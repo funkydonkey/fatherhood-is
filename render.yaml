@@ -1,0 +1,83 @@
+# Render.com Blueprint for Fatherhood Is Backend
+# This file configures automatic deployment from GitHub
+
+services:
+  # Backend API Service
+  - type: web
+    name: fatherhood-is-backend
+    runtime: python
+    region: frankfurt  # Change to oregon/singapore if needed
+    plan: free  # Free tier with 750 hours/month
+    branch: main  # Deploy from main branch
+    rootDir: backend  # Backend code directory
+
+    # Build configuration
+    buildCommand: |
+      python -m pip install --upgrade pip
+      pip install -r requirements.txt
+
+    # Start command
+    startCommand: python run.py
+
+    # Health check endpoint
+    healthCheckPath: /health
+
+    # Auto-deploy on push
+    autoDeploy: true
+
+    # Environment variables (set these in Render dashboard)
+    envVars:
+      # Python
+      - key: PYTHON_VERSION
+        value: 3.11.7
+
+      # Application
+      - key: ENVIRONMENT
+        value: production
+
+      - key: API_HOST
+        value: 0.0.0.0
+
+      - key: API_PORT
+        value: 10000  # Render uses port 10000
+
+      # Frontend URL (update after deploying to Vercel)
+      - key: FRONTEND_URL
+        sync: false  # Set manually in dashboard
+
+      # Supabase Database (set in dashboard)
+      - key: SUPABASE_URL
+        sync: false
+
+      - key: SUPABASE_KEY
+        sync: false
+
+      - key: SUPABASE_ANON_KEY
+        sync: false
+
+      - key: DATABASE_URL
+        sync: false
+
+      # Google Gemini API (set in dashboard)
+      - key: GOOGLE_API_KEY
+        sync: false
+
+      # Cloudflare R2 Storage (set in dashboard)
+      - key: R2_ACCOUNT_ID
+        sync: false
+
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+
+      - key: R2_BUCKET_NAME
+        value: fatherhood-images
+
+      - key: R2_PUBLIC_URL
+        sync: false
+
+      # Rate Limiting
+      - key: RATE_LIMIT_PER_HOUR
+        value: 10

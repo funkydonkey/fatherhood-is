@@ -16,10 +16,14 @@ class LocalStorageService:
         os.makedirs(self.upload_dir, exist_ok=True)
 
         # Determine base URL based on environment
-        if settings.is_production:
-            # On Render, use the service URL
+        if settings.backend_url:
+            # Use explicitly configured backend URL (for production)
+            self.base_url = settings.backend_url
+        elif settings.is_production:
+            # Fallback: try RENDER_EXTERNAL_URL env var
             self.base_url = os.getenv("RENDER_EXTERNAL_URL", "http://localhost:8000")
         else:
+            # Development: use local server
             self.base_url = f"http://{settings.api_host}:{settings.api_port}"
 
     async def upload_image(

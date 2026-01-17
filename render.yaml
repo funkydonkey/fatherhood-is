@@ -45,6 +45,10 @@ services:
       - key: FRONTEND_URL
         sync: false  # Set manually in dashboard
 
+      # Backend URL (for generating correct image URLs)
+      - key: BACKEND_URL
+        sync: false  # Set manually in dashboard (e.g., https://fatherhood-is-backend.onrender.com)
+
       # Supabase Database (set in dashboard)
       - key: SUPABASE_URL
         sync: false

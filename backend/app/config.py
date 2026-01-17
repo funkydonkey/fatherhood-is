@@ -34,6 +34,7 @@ class Settings(BaseSettings):
     api_host: str = "0.0.0.0"
     api_port: int = 8000
     frontend_url: str = "http://localhost:3000"
+    backend_url: Optional[str] = None  # External backend URL for image URLs
 
     # Rate Limiting
     rate_limit_per_hour: int = 10

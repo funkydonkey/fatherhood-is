@@ -23,7 +23,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Python**: 3.11+
 - **Package Manager**: uv (modern Python package manager)
 - **Database**: Supabase (PostgreSQL) via `supabase-py`
-- **Storage**: Cloudflare R2 (S3-compatible via `boto3`)
+- **Storage**: Supabase Storage (CDN-backed image storage)
 - **AI Image Generation**: Google Gemini Imagen 3.0 (imagen-3.0-generate-001)
 - **Validation**: Pydantic 2.x
 - **Server**: Uvicorn with auto-reload
@@ -294,7 +294,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
 
 ### Backend (backend/.env)
 ```env
-# Database (Supabase)
+# Database & Storage (Supabase)
 SUPABASE_URL=https://xxx.supabase.co
 SUPABASE_KEY=eyJ...  # Service role key
 SUPABASE_ANON_KEY=eyJ...
@@ -303,13 +303,6 @@ DATABASE_URL=postgresql://...
 # Image Generation (Google Gemini Imagen)
 GOOGLE_API_KEY=your-google-ai-api-key
 
-# Storage (Cloudflare R2)
-R2_ACCOUNT_ID=...
-R2_ACCESS_KEY_ID=...
-R2_SECRET_ACCESS_KEY=...
-R2_BUCKET_NAME=fatherhood-images
-R2_PUBLIC_URL=https://images.fatherhood.is
-
 # App
 ENVIRONMENT=development
 API_HOST=0.0.0.0
@@ -317,6 +310,9 @@ API_PORT=8000
 FRONTEND_URL=http://localhost:3000
 RATE_LIMIT_PER_HOUR=10
 ```
+
+**Note**: Images are stored in Supabase Storage bucket `fatherhood-images` (must be public).
+Public URL format: `https://<project>.supabase.co/storage/v1/object/public/fatherhood-images/<filename>`
 
 ## Configuration
 
@@ -329,7 +325,8 @@ const nextConfig = {
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: 'images.fatherhood.is',  // R2 domain
+                hostname: '*.supabase.co',  // Supabase Storage CDN
+                pathname: '/storage/v1/object/public/**',
             },
         ],
     },
@@ -356,7 +353,7 @@ All settings loaded from environment variables via `app/config.py`.
 - ✅ Supabase setup + posts table migration
 - ✅ Python FastAPI project structure with uv
 - ✅ Google Gemini Imagen integration
-- ✅ Cloudflare R2 storage service
+- ✅ Supabase Storage service (replaced R2)
 - ✅ Validation and Pydantic models
 - ✅ API endpoints (POST /api/posts, GET /api/posts, GET /api/posts/:id)
 - ✅ Removed unnecessary TypeScript backend files
@@ -389,13 +386,16 @@ All settings loaded from environment variables via `app/config.py`.
 - Client components only for interactivity (forms, pagination)
 
 ### Image Handling
-- Images stored in Cloudflare R2 (S3-compatible)
-- Use Next.js `<Image>` component with R2 remote pattern
+- Images stored in Supabase Storage (CDN-backed, 1GB free tier)
+- Public bucket `fatherhood-images` must be created manually in Supabase Dashboard
+- Use Next.js `<Image>` component with Supabase CDN remote pattern
+- URLs format: `https://<project>.supabase.co/storage/v1/object/public/fatherhood-images/<filename>`
 - Consider hybrid approach if AI text rendering unstable: generate illustration only, add text overlay with Pillow/Canvas
 
 ### Render.com Free Tier Constraints
 - Service sleeps after 15min inactivity (first request slow)
 - 750 hours/month (sufficient for 24/7 single service)
+- **Ephemeral filesystem** - files in `/uploads` deleted on restart (use Supabase Storage!)
 - Auto HTTPS
 - Auto-deploy from GitHub
 

@@ -6,20 +6,9 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "8000",
-        pathname: "/uploads/**",
-      },
-      {
         protocol: "https",
-        hostname: "fatherhood-is-backend.onrender.com",
-        pathname: "/uploads/**",
-      },
-      {
-        protocol: "https",
-        hostname: "images.fatherhood.is",
-        pathname: "/**",
+        hostname: "*.supabase.co",
+        pathname: "/storage/v1/object/public/**",
       },
     ],
     // Disable optimization for localhost in development
